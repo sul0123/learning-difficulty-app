@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تسجيل الدخول - منصة القراءة التفاعلية</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="../database.js" defer></script>
+  <script src="app.js" defer></script>
+
+  <!-- ملف التنسيق -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="auth-container">
+    <div class="logo-box">
+      <h2>منصة القراءة التفاعلية</h2>
+      <p>مرحباً بك! يرجى تسجيل الدخول أو إنشاء حساب</p>
+    </div>
+
+    <!-- أزرار التنقل بين تسجيل الدخول وحساب جديد -->
+    <div class="tabs">
+      <button type="button" id="tab-login" class="tab-btn" onclick="switchTab('login')">تسجيل الدخول</button>
+      <button type="button" id="tab-signup" class="tab-btn active" onclick="switchTab('signup')">حساب جديد</button>
+    </div>
+
+    <!-- نموذج تسجيل الدخول -->
+    <form id="login-form" class="auth-form">
+      <div class="form-group">
+        <label>البريد الإلكتروني</label>
+        <input type="email" id="login-email" required>
+      </div>
+      <div class="form-group">
+        <label>كلمة المرور</label>
+        <input type="password" id="login-password" required placeholder="••••••••">
+      </div>
+      <button type="submit" class="btn btn-primary">دخول</button>
+    </form>
+
+    <!-- نموذج إنشاء حساب جديد -->
+    <form id="signup-form" class="auth-form active">
+      <div class="form-group">
+        <label>الاسم الكامل</label>
+        <input type="text" id="signup-name" required>
+      </div>
+      <div class="form-group">
+        <label>البريد الإلكتروني</label>
+        <input type="email" id="signup-email" required>
+      </div>
+      <div class="form-group">
+        <label>كلمة المرور</label>
+        <input type="password" id="signup-password" required placeholder="••••••••">
+      </div>
+      <div class="form-group">
+        <label>تأكيد كلمة المرور</label>
+        <input type="password" id="signup-confirm-password" required placeholder="••••••••">
+      </div>
+      <button type="submit" class="btn btn-primary">إنشاء حساب</button>
+    </form>
+    <p id="auth-message" role="status" aria-live="polite"></p>
+  </div>
+
+</body>
+</html>

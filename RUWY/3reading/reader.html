@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>قراءة القصة - روي</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main>
+        <h1 id="story-title">قراءة القصة</h1>
+
+        <p id="message" role="status" aria-live="polite"></p>
+
+        <section id="start-section" class="panel">
+            <p id="story-description">جاري تحميل القصة...</p>
+            <button id="start-btn" type="button" disabled>
+                بدء القراءة
+            </button>
+        </section>
+
+        <section id="reader-section" class="hidden">
+
+            <p id="page-indicator" class="page-indicator"></p>
+
+            <div id="page-text"></div>
+
+            <div class="buttons">
+                <button id="prev-btn" type="button" disabled>
+                    السابق
+                </button>
+
+                <button id="next-btn" type="button">
+                    التالي
+                </button>
+
+                <button id="finish-btn" class="hidden" type="button">
+                    إنهاء القراءة
+                </button>
+            </div>
+
+            <section id="recording-panel" class="recording-panel">
+                <h2>تسجيل القراءة</h2>
+
+                <p id="storageNotice" role="status"></p>
+
+                <div class="recording-options">
+                    <label>
+                        <input type="checkbox" id="audioCheck" checked>
+                        تسجيل الصوت
+                    </label>
+
+                    <label>
+                        <input type="checkbox" id="videoCheck">
+                        تسجيل الفيديو
+                    </label>
+                </div>
+
+                <p>
+                    مدة التسجيل:
+                    <strong id="timer">00:00</strong>
+                </p>
+
+                <video
+                    id="preview"
+                    autoplay
+                    muted
+                    playsinline
+                    class="hidden"
+                ></video>
+
+                <div class="buttons">
+                    <button id="startRecordBtn" type="button" disabled>
+                        بدء التسجيل
+                    </button>
+
+                    <button id="stopRecordBtn" type="button" disabled>
+                        إيقاف التسجيل وحفظه
+                    </button>
+                </div>
+
+                <h3>التسجيلات المحفوظة</h3>
+                <div id="recordings"></div>
+            </section>
+
+            <div class="end-session">
+                <button id="end-btn" class="secondary-btn" type="button">
+                    إنهاء الجلسة
+                </button>
+            </div>
+        </section>
+
+        <a id="back-link" class="back-link" href="stories.html">
+            العودة إلى القصص
+        </a>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script src="../database.js"></script>
+    <script src="reader.js"></script>
+</body>
+</html>
