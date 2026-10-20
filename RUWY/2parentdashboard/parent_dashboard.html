@@ -1,0 +1,178 @@
+
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>روي | لوحة ولي الأمر</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js" defer></script>
+    <script src="../database.js" defer></script>
+    <script src="app.js" defer></script>
+</head>
+
+<body>
+    <div class="layout">
+
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="logo.png" alt="شعار روي" class="logo-img">
+
+                <div class="logo-text">
+                    <span>روي</span>
+                    <p></p>
+                    <small>رحلة القراءة تبدأ من هنا</small>
+                </div>
+            </div>
+
+            <nav aria-label="القائمة الرئيسية">
+                <a href="#overview" class="nav active">⌂ <span>الرئيسية</span></a>
+                <a href="#childrenSection" class="nav">♧ <span>أطفالي</span></a>
+                <a href="#sessionsSection" class="nav">▤ <span>جلسات القراءة</span></a>
+                <a href="#reportsSection" class="nav">▣ <span>التقارير والتوصيات</span></a>
+            </nav>
+
+            <div class="side-bottom">
+                <div class="profile-avatar">و</div>
+                <div>
+                    <b id="sideParent">ولي الأمر</b>
+                    <small>حساب ولي الأمر</small>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main" id="overview">
+
+            <header class="top">
+                <div class="mobile-brand">✦ روي</div>
+
+                <div class="top-left">
+                    <span id="modePill" class="pill">جاري التحقق...</span>
+                    <button class="outline" id="logoutBtn" type="button">تسجيل الخروج</button>
+                </div>
+            </header>
+
+            <div class="intro">
+                <div>
+                    <h1>أهلًا، <span id="parentName">ولي الأمر</span></h1>
+                    <p>تابعي رحلة أطفالك مع القراءة، خطوة بخطوة.</p>
+                </div>
+
+                <button class="primary" id="addChildBtn" type="button">＋ إضافة طفل</button>
+            </div>
+
+            <div id="notice" role="status" aria-live="polite"></div>
+
+            <section class="stats" aria-label="ملخص النشاط">
+                <div class="stat">
+                    <span class="stat-icon green">♧</span>
+                    <span>عدد الأطفال</span>
+                    <strong id="statChildren">—</strong>
+                    <small>ملفات مسجلة</small>
+                </div>
+
+                <div class="stat">
+                    <span class="stat-icon gold">▤</span>
+                    <span>جلسات القراءة</span>
+                    <strong id="statSessions">—</strong>
+                    <small>إجمالي الجلسات المحمّلة</small>
+                </div>
+
+                <div class="stat">
+                    <span class="stat-icon blue">◷</span>
+                    <span>وقت القراءة</span>
+                    <strong id="statMinutes">—</strong>
+                    <small>دقيقة مكتملة</small>
+                </div>
+            </section>
+
+            <section id="childrenSection" class="section">
+                <div class="section-head">
+                    <div>
+                        <span class="eyebrow">إدارة الملفات</span>
+                        <h2>أطفالي</h2>
+                    </div>
+
+                    <button class="outline" id="addChildSecondary" type="button">＋ طفل جديد</button>
+                </div>
+
+                <div id="childrenList" class="children-grid"></div>
+            </section>
+
+            <section id="sessionsSection" class="section">
+                <div class="section-head">
+                    <div>
+                        <span class="eyebrow">متابعة التقدم</span>
+                        <h2>أحدث جلسات القراءة</h2>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div id="sessionsList"></div>
+                </div>
+            </section>
+
+            <section id="reportsSection" class="section">
+                <div class="section-head">
+                    <div>
+                        <span class="eyebrow">متابعة المختص</span>
+                        <h2>التقارير والتوصيات</h2>
+                    </div>
+                </div>
+                <div id="reportsList" class="panel"></div>
+            </section>
+
+            <footer>روي © 2026 — مشروع تطوير مهارات القراءة</footer>
+        </main>
+    </div>
+
+    <dialog id="childDialog" aria-labelledby="dialogTitle">
+        <form id="childForm">
+            <div class="dialog-head">
+                <div>
+                    <span class="eyebrow">ملف الطفل</span>
+                    <h2 id="dialogTitle">إضافة طفل</h2>
+                </div>
+
+                <button class="icon-btn" type="button" id="closeChild" aria-label="إغلاق">✕</button>
+            </div>
+
+            <input id="childId" type="hidden">
+
+            <label for="childName">اسم الطفل</label>
+            <input id="childName" type="text" maxlength="80" required placeholder="اكتبي اسم الطفل">
+
+            <label for="childBirth">تاريخ الميلاد</label>
+            <input id="childBirth" type="date" required>
+
+            <label for="childGender">الجنس</label>
+            <select id="childGender" required>
+                <option value="male">ذكر</option>
+                <option value="female">أنثى</option>
+            </select>
+
+            <div class="dialog-actions">
+                <button type="button" class="outline" id="cancelChild">إلغاء</button>
+                <button type="submit" class="primary" id="saveChildBtn">حفظ البيانات</button>
+            </div>
+        </form>
+    </dialog>
+
+    <dialog id="historyDialog" aria-labelledby="historyTitle">
+        <div class="dialog-head">
+            <h2 id="historyTitle">سجل القراءة</h2>
+            <button class="icon-btn" id="closeHistory" type="button" aria-label="إغلاق">✕</button>
+        </div>
+
+        <div id="historyList"></div>
+
+        <div class="dialog-actions">
+            <button class="outline" id="doneHistory" type="button">إغلاق</button>
+        </div>
+    </dialog>
+</body>
+</html>

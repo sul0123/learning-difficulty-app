@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>القصص التفاعلية</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script src="../database.js" defer></script>
+    <script src="stories.js" defer></script>
+</head>
+<body>
+    <main>
+        <h1>القصص التفاعلية</h1>
+        <p class="description">اختاري قصة وابدئي رحلة القراءة.</p>
+
+        <div class="filters">
+            <label for="age-filter">
+                عمر الطفل
+                <select id="age-filter">
+                    <option value="">كل الأعمار</option>
+                    <option value="4">4 سنوات</option>
+                    <option value="5">5 سنوات</option>
+                    <option value="6">6 سنوات</option>
+                    <option value="7">7 سنوات</option>
+                    <option value="8">8 سنوات</option>
+                    <option value="9">9 سنوات</option>
+                    <option value="10">10 سنوات</option>
+                    <option value="11">11 سنة</option>
+                    <option value="12">12 سنة</option>
+                </select>
+            </label>
+
+            <label for="level-filter">
+                مستوى الصعوبة
+                <select id="level-filter">
+                    <option value="">كل المستويات</option>
+                    <option value="easy">سهل</option>
+                    <option value="medium">متوسط</option>
+                    <option value="hard">صعب</option>
+                </select>
+            </label>
+        </div>
+
+        <p id="message" role="status" aria-live="polite"></p>
+        <section id="stories-list" class="stories-list"></section>
+
+        <a class="back-link" href="../2parentdashboard/parent_dashboard.html">العودة إلى لوحة التحكم</a>
+    </main>
+
+</body>
+</html>
